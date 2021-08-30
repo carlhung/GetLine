@@ -12,10 +12,10 @@ public class ReadLine {
     private var bytesRead: Int
     
     // a pointer to a null-terminated, UTF-8 encoded sequence of bytes
-    var lineByteArrayPointer: UnsafeMutablePointer<CChar>? = nil
+    private var lineByteArrayPointer: UnsafeMutablePointer<CChar>? = nil
 
     // the smallest multiple of 16 that will fit the byte array for this line
-    var lineCap: Int = 0
+    private var lineCap: Int = 0
 
     public init(url: URL) throws {
         guard FileManager.default.fileExists(atPath: url.path) else {
