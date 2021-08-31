@@ -5,7 +5,7 @@ public enum ReadLineError: Error {
     case couldNotOpenFile
 }
 
-public class ReadLine {
+public final class ReadLine {
     private let url: URL
     private var filePointer: UnsafeMutablePointer<FILE>
     private var pointerIsReleased = false
@@ -38,7 +38,11 @@ public class ReadLine {
         guard !self.pointerIsReleased else {
             return
         } 
-        // self.lineByteArrayPointer?.deallocate()
+        
+        // when getline is called for the first time, lineByteArrayPointer is nil and lineCap is 0.
+        // getline will allocate memory automatcally. but user need to release by himself/herself.
+        // for more detail, in bash, type, $ man getline
+        self.lineByteArrayPointer?.deallocate()
         fclose(self.filePointer)
         self.pointerIsReleased = true
     }
