@@ -27,7 +27,9 @@ let fileUrl = home
 
             var result:(isSuccess: Bool, message: String?)
             do {
-                var readLine = try ReadLine(url: url)
+                let readLine = try ReadLine(url: url)
+                while let _ = readLine.nextLine() {}
+                try readLine.restart()
                 while let _ = readLine.nextLine() {}
                 result = (true, nil)
             } catch {

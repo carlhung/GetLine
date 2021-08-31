@@ -7,9 +7,9 @@ public enum ReadLineError: Error {
 
 public final class ReadLine {
     private let url: URL
-    private var filePointer: UnsafeMutablePointer<FILE>
+    private var filePointer: UnsafeMutablePointer<FILE>!
     private var pointerIsReleased = false
-    private var bytesRead: Int
+    private var bytesRead: Int!
     
     // a pointer to a null-terminated, UTF-8 encoded sequence of bytes
     private var lineByteArrayPointer: UnsafeMutablePointer<CChar>? = nil
@@ -22,7 +22,10 @@ public final class ReadLine {
             throw ReadLineError.fileDoesNotExist
         }
         self.url = url
+        try self.start()
+    }
 
+    private func start() throws {
         // open the file for reading
         // note: user should be prompted the first time to allow reading from this location
         guard let filePointer:UnsafeMutablePointer<FILE> = fopen(self.url.path,"r") else {
@@ -32,6 +35,16 @@ public final class ReadLine {
 
         // initial iteration
         self.bytesRead = getline(&self.lineByteArrayPointer, &self.lineCap, self.filePointer)
+    }
+
+    public func restart() throws {
+        self.close()
+        self.lineCap = 0
+        self.lineByteArrayPointer = nil
+        self.filePointer = nil
+        self.bytesRead = nil
+        self.pointerIsReleased = false
+        try self.start()
     }
 
     public func close() {
@@ -54,9 +67,10 @@ public final class ReadLine {
         }
         
         // note: this translates the sequence of bytes to a string using UTF-8 interpretation
-        let lineAsString = String(cString:self.lineByteArrayPointer!)
-            
+        let lineAsString = String(cString:self.lineByteArrayPointer!).trimmingCharacters(in: .whitespacesAndNewlines) 
+        
         // updates number of bytes read, for the next iteration
+        // return -1 on failure to read a line (including end-of-file condition). In the event  of  an error, errno is set to indicate the cause.
         self.bytesRead = getline(&self.lineByteArrayPointer, &lineCap, filePointer)
             
         return lineAsString
