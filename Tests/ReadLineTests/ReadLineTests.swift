@@ -17,7 +17,7 @@ let fileUrl = home
 
     final class ReadLineTests: XCTestCase {
         func testExample() {
-
+            print("start")
             // let currentPath = FileManager.default.currentDirectoryPath // /home/carlhung/swiftProjects/ReadLine
 
             let currentPath = Bundle.main.bundlePath //  /home/carlhung/swiftProjects/ReadLine/.build/x86_64-unknown-linux-gnu/debug
@@ -40,7 +40,7 @@ let fileUrl = home
             // Use XCTAssert and related functions to verify your tests produce the correct
             // results.
 
-            // XCTAssertEqual(true, "Hello, World!")
+            // XCTAssert(false, "test failed")
             XCTAssert(result.isSuccess, result.message ?? "")
         }
     }
