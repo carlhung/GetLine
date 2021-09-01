@@ -17,7 +17,6 @@ let fileUrl = home
 
     final class ReadLineTests: XCTestCase {
         func testExample() {
-            print("start")
             // let currentPath = FileManager.default.currentDirectoryPath // /home/carlhung/swiftProjects/ReadLine
 
             let currentPath = Bundle.main.bundlePath //  /home/carlhung/swiftProjects/ReadLine/.build/x86_64-unknown-linux-gnu/debug
@@ -28,9 +27,14 @@ let fileUrl = home
             var result:(isSuccess: Bool, message: String?)
             do {
                 let readLine = try ReadLine(url: url)
-                while let _ = readLine.nextLine() {}
+                while case let .some(line) = readLine.nextLine(), !line.contains("Date") {
+                    // print("yes, it contains: \(line)")
+                    print("val: \(line)")
+                }
                 try readLine.restart()
-                while let _ = readLine.nextLine() {}
+                while case _? = readLine.nextLine() {
+
+                }
                 result = (true, nil)
             } catch {
                 result = (false, "\(error)")
