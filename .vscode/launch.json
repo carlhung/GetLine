@@ -1,0 +1,45 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        // {
+        //     "type": "lldb",
+        //     "request": "launch",
+        //     "name": "Debug",
+        //     "program": "${workspaceFolder}/<your program>",
+        //     "args": [],
+        //     "cwd": "${workspaceFolder}"
+        // }
+
+        // Running executables
+        // {
+        //     "type": "lldb",
+        //     "request": "launch",
+        //     "name": "playground",
+        //     "program": "${workspaceFolder}/.build/debug/playground",
+        //     "args": [],
+        //     "cwd": "${workspaceFolder}",
+        //     "preLaunchTask": "swift-build"
+        // },
+        // Running unit tests
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug tests on Linux",
+            "program": "${workspaceFolder}/.build/debug/ReadLinePackageTests.xctest", //For example /Applications/Xcode.app/Contents/Developer/usr/bin/xctest
+            // "args": [
+            //     "${workspaceFolder}/.build/debug/<xctest bundle name>.xctest"
+            // ],
+            "preLaunchTask": "swift-build-tests"
+        },
+        // {
+        //     "type": "lldb",
+        //     "request": "launch",
+        //     "name": "Debug tests on Linux",
+        //     "program": "./.build/x86_64-unknown-linux/debug/YourPackageTests.xctest",
+        //     "preLaunchTask": "swift-build-tests"
+        // }
+    ]
+}

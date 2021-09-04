@@ -1,0 +1,24 @@
+// .vscode/tasks.json
+{
+    "version": "2.0.0",
+    "tasks": [
+        // compile your SPM project
+        {
+            "label": "swift-build",
+            "type": "shell",
+            "command": "swift build" // for TensorFlow add -Xlinker -ltensorflow
+        },
+        // compile your SPM tests
+        {
+            "label": "swift-build-tests",
+            "type": "process",
+            "command": "swift",
+            "group": "build",
+            "args": [
+                // "test", "--parallel", // build then runnig test parallelly. but debugger won't work. you should let debugger to run the test.
+                "build", "--build-tests", // Build both source and test targets, but it won't run the test. let the debugger to run the test target. which is xxx.xctest
+                 // for TensorFlow add "-Xlinker", "-ltensorflow"
+            ]
+        }
+    ]
+}
