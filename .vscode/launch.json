@@ -28,7 +28,15 @@
             "type": "lldb",
             "request": "launch",
             "name": "Debug tests on Linux",
-            "program": "${workspaceFolder}/.build/debug/ReadLinePackageTests.xctest", //For example /Applications/Xcode.app/Contents/Developer/usr/bin/xctest
+            // "osx": {
+                // "program": "${workspaceFolder}/Applications/Xcode.app/Contents/Developer/usr/bin/xctest",
+            // },
+            // "windows": {
+
+            // },
+            "linux": {
+                "program": "${workspaceFolder}/.build/debug/ReadLinePackageTests.xctest",
+            },
             // "args": [
             //     "${workspaceFolder}/.build/debug/<xctest bundle name>.xctest"
             // ],
