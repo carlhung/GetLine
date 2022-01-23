@@ -16,13 +16,20 @@ let fileUrl = home
 */
 
     final class ReadLineTests: XCTestCase {
+
+        let url = Bundle.module.url(forResource: "budget_data", withExtension: "csv")
+        
         func testExample() {
             // let currentPath = FileManager.default.currentDirectoryPath // /home/carlhung/swiftProjects/ReadLine
 
-            let currentPath = Bundle.main.bundlePath //  /home/carlhung/swiftProjects/ReadLine/.build/x86_64-unknown-linux-gnu/debug
-
-            let filePath = currentPath + "/ReadLine_ReadLineTests.resources/budget_data.csv"
-            let url = URL.init(fileURLWithPath: filePath)
+            // let currentPath = Bundle.main.bundlePath //  /home/carlhung/swiftProjects/ReadLine/.build/x86_64-unknown-linux-gnu/debug
+            // let filePath = currentPath + "/ReadLine_ReadLineTests.resources/budget_data.csv"
+            // let url = URL.init(fileURLWithPath: filePath)
+           
+            guard let url = self.url else {
+                XCTAssert(false, "wrong url path")
+                return
+            }
 
             var result:(isSuccess: Bool, message: String?)
             do {
